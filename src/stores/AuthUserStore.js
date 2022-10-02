@@ -6,4 +6,8 @@ export const useAuthUserStore = defineStore("AuthUserStore", {
             username: "Bohdan"
         };
     },
+
+    getters: {
+        getterusername: (state) => state.username,
+    },
 });
