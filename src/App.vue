@@ -7,6 +7,29 @@ import { useCartStore } from "@/stores/CartStore.js";
 const productStore = useProductStore();
 const cartStore = useCartStore();
 productStore.fill();
+
+const unsubscribe = cartStore.$onAction(
+  ({
+     name, // name of the action
+     store, // store instance, same as `someStore`
+     args, // array of parameters passed to the action
+     after, // hook after the action returns or resolves
+     onError, // hook if the action throws or rejects
+   }) => {
+    if (name === 'addItems') {
+      after(() => {
+        console.log(args[0]);
+      });
+    }
+
+    onError((error) => {
+      console.warn('Hello error: ', error.message);
+    })
+  }
+)
+
+// manually remove the listener
+// unsubscribe()
 </script>
 
 <template>
